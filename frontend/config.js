@@ -12,7 +12,7 @@
  *     e.g. "https://docchat-backend.onrender.com".
  */
 (function () {
-  var PRODUCTION_API_BASE = "https://your-backend.onrender.com";
+  var PRODUCTION_API_BASE = "https://docchat-m7ob.onrender.com/";
 
   var host = window.location.hostname;
   var isLocal =
