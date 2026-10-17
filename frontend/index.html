@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DocChat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><span class="brand-mark">D</span><span>DocChat</span><button type="button" class="sidebar-close" id="sidebar-close" aria-label="Close menu">&times;</button></div>
+      <button class="new-chat" id="new-chat-btn" type="button" title="Start a new chat"><span>+</span> New chat</button>
+
+      <section class="document-panel">
+        <div class="panel-label">Your document</div>
+        <div class="upload-zone" id="upload-well">
+          <input type="file" id="file-input" accept=".pdf,.docx,.txt,.png,.jpg,.jpeg,.webp,.bmp,.tiff,.tif" hidden>
+          <div class="upload-icon">&#8679;</div>
+          <p>Drop a file here</p>
+          <span>PDF, DOCX, TXT, or Images</span>
+          <button type="button" id="browse-btn">Browse files</button>
+        </div>
+        <div id="selected-file" class="selected-file hidden">
+          <span class="file-badge">FILE</span>
+          <span class="file-name" id="selected-file-name"></span>
+          <button type="button" id="clear-file-btn" title="Remove file">&times;</button>
+        </div>
+        <button id="process-btn" class="index-button" disabled>Index document</button>
+        <div id="doc-status" class="document-ready hidden">
+          <span class="ready-dot"></span>
+          <div><strong id="status-name"></strong><small id="status-detail"></small></div>
+        </div>
+        <div id="upload-error" class="error-msg hidden" role="alert"></div>
+      </section>
+
+      <section class="settings">
+        <div class="panel-label">Retrieval</div>
+        <label for="topk-range">Detail level <span id="topk-value">4</span></label>
+        <input type="range" id="topk-range" min="2" max="8" value="4">
+        <label for="model-select">Groq model</label>
+          <select id="model-select">
+          <option value="openai/gpt-oss-120b" selected>GPT OSS 120B</option>
+          <option value="openai/gpt-oss-20b">GPT OSS 20B (Fast)</option>
+          <option value="qwen/qwen3.8-27b">Qwen 3.8 27B</option>
+          </select>
+      </section>
+      <div class="sidebar-foot">Private document chat</div>
+    </aside>
+
+    <main class="chat-area">
+      <header class="chat-header">
+        <span class="header-left">
+          <button type="button" id="menu-btn" class="menu-btn" aria-label="Open menu">&#9776;</button>
+          <span id="chat-title">New conversation</span>
+        </span>
+        <span class="model-status">GROQ</span>
+      </header>
+      <div class="conversation" id="feed">
+        <section class="welcome" id="empty-state">
+          <div class="welcome-logo">D</div>
+          <h1>What would you like to know?</h1>
+          <p>Upload a document, then ask for explanations, summaries, or diagrams.</p>
+          <div class="prompt-suggestions">
+            <button type="button" data-prompt="Explain the main topics in detail">Explain the main topics in detail</button>
+            <button type="button" data-prompt="Summarize this document in detail">Summarize this document in detail</button>
+            <button type="button" data-prompt="List the main topics covered in this document">List the main topics covered</button>
+          </div>
+        </section>
+      </div>
+      <div class="composer-wrap">
+        <form class="composer" id="composer">
+          <textarea id="question-input" rows="1" placeholder="Upload a document to start chatting" autocomplete="off" disabled></textarea>
+          <button type="submit" id="ask-btn" disabled title="Send message">&#8593;</button>
+        </form>
+        <p>DocChat can make mistakes. Check important information.</p>
+      </div>
+    </main>
+  </div>
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+  <script src="config.js"></script>
+  <script src="static/js/app.js"></script>
+</body>
+</html>
